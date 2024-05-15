@@ -56,30 +56,53 @@ const RESTAURANT = {
 };
 
 app.get("/", (req, res) => {
-    res.render("home.ejs", {
-        restaurant: RESTAURANT,
-    });
-
+  res.render("home.ejs", {
+    restaurant: RESTAURANT, // <-- Locals object
+  });
 });
-
 
 app.get("/menu", (req, res) => {
-    res.render("menu.ejs", {
-        restaurant: RESTAURANT,
-    });
-
+  res.render("menu.ejs", {
+    menu: RESTAURANT.menu, // <-- Locals object
+  });
 });
 
-app.get("/menu/:category", (req, res) => {
-    const index = req.params.category
-    console.log(index);
-    res.render('category.ejs', {
-        
-        restaurant: RESTAURANT[index],
-    });
+// Locals object is what is passed to render ------
 
-    console.log(req.params.category);
-});
+app.get('/menu/:category', (req, res) => {
+	const category = req.params.category
+	const menuItems = RESTAURANT.menu.filter((item) => {
+		return item.category === category
+	});
+	
+	
+	res.render('category.ejs', {
+		category,
+		menuItems,
+	})
 
+
+
+
+})
+
+// app.get("/menu/:category", (req, res) => {
+//   const menuItems = [];
+//   const category = req.params.category;
+
+//   for (let item of RESTAURANT.menu) {
+//     if (item.category === category) {
+//       menuItems.push(item);
+//     }
+//   }
+//   // * using filter instead of for of loop
+//   // const menuItems = RESTAURANT.menu.filter(item => {
+//   //   return item.category === category
+//   // })
+
+//   res.render("category.ejs", {
+//     menuItems: menuItems,
+//   });
+// });
 
 app.listen(3000);

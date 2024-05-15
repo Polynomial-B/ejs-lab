@@ -7,12 +7,15 @@
 </head>
 <body style="background: rgb(101, 92, 99)">
     <%- include('./partials/nav') %>
-    <h1><%=item.id%></h1>
-    <ul>
-        <% restaurant.menu.forEach((item, index) => { %>
-        <li><a href="/<%=item.id%>">
-            <%= item.name %></a>   <%= item.price %>€ <br>"<%=item.details%>" </li>
-        <% }) %>
+        <h1><%= category %></h1>
+        
+            <% menuItems.forEach((item) => { %>
+                
+                    <h2><%= `${item.name} - $${item.price} `%></h2>
+                    <p><%= item.details %> </p>
+                    
+                
+            <% }) %>
     </ul>
 </body>
 </html>

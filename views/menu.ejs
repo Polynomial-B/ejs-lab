@@ -9,7 +9,7 @@
     <%- include('./partials/nav') %>
     <h1><Full Menu></h1>
     <ul>
-        <% restaurant.menu.forEach((item, index) => { %>
+        <% menu.forEach((item, index) => { %>
         <li><a href="<%=item.id%>">
             <%= item.name %></a>   <%= item.price %>€ <br>"<%=item.details%>" </li>
         <% }) %>
